@@ -490,8 +490,6 @@ def task_hourly_zikr():
         f"<b>{zikr}</b>\n\n"
         f"┄┄┄┄┄┄┄┄┄┄┄┄\n"
         f"<i>{hadith}</i>\n"
-        f"━━━━━━━━━━━━━━━━\n"
-        f"🤍 <i>قلها الآن — الأجر لا ينتظر</i>"
     )
     print("📿 إرسال الذكر العشوائي")
     send_text(msg)
