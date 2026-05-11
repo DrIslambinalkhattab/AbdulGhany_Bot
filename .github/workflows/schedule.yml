@@ -55,9 +55,6 @@ on:
           - remind_night
           - friday_salah
           - hourly_zikr
-          - ayah
-          - hadith
-          - stories
           - fasting_monday
           - fasting_thursday
 
