@@ -378,7 +378,7 @@ def task_hourly_zikr():
     icon, zikr, hadith = AZKAAR[idx]
     msg = (
         f"{icon} <b>ذكر الساعة</b>\n"
-        f"<blockquote><b>{zikr}</b></blockquote> \n"
+        f"<blockquote><b>{zikr}</b></blockquote>\n"
         f"<i><b>{hadith}</b></i>\n"
     )
     print("📿 إرسال الذكر العشوائي")
