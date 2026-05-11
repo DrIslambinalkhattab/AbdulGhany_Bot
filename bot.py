@@ -411,14 +411,3 @@ if __name__ == "__main__":
     print(f"▶️  تشغيل المهمة: {task_name}")
     TASKS[task_name]()
     print("✅ انتهت المهمة بنجاح")
-BOTEOF
-python3 -c "
-import ast
-with open('/home/claude/YomnaBot/bot.py', 'r') as f:
-    c = f.read()
-try:
-    ast.parse(c)
-    print('✅ الكود صح 100%')
-except SyntaxError as e:
-    print(f'❌ خطأ في السطر {e.lineno}: {e.msg}')
-"
