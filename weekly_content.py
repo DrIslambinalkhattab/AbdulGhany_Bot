@@ -1,5 +1,5 @@
 """
-weekly_content.py — تذكير الصيام
+weekly_content.py — AbdulGhanyBot | صدقة جارية عَنْ عبد الغني
 """
 
 import os
