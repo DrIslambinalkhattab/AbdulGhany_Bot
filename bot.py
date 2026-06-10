@@ -1,5 +1,5 @@
 """
-YomnaBot — يشتغل مرة واحدة عن طريق GitHub Actions
+AbdulGhanyBot — يشتغل مرة واحدة عن طريق GitHub Actions
 """
 
 import os
