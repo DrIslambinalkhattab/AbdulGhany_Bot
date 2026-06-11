@@ -132,10 +132,10 @@ def task_daily_files():
     date_str = datetime.now(CAIRO_TZ).strftime("%d / %m / %Y")
 
     caption_pdf = (
-        f"<blockquote><b>  📖 الورد اليومي الختمة الـ{khatma}</b></blockquote>\n"
+        f"<blockquote><b>📖 الورد اليومي - الختمة الـ{khatma}</b></blockquote>\n"
         f"🗓 <i>{date_str}</i> • 📂 الورد الـ<b>{num}</b>\n"
         f"━━━━━━━━━━━━━━━━\n"
-        f"<b>📊 تقدّمك:</b> {bar}  <b>{pct}%</b>\n"
+        f"<b>📊 تقدّمك:</b> {bar}\n"
         f"━━━━━━━━━━━━━━━━\n"
         f"{motiv}\n"
         f"<blockquote><b>🤲 نسأل الله أن يجعله نورًا في قلوبنا، وبركةً في أيامنا.</b></blockquote>"
@@ -175,8 +175,8 @@ def task_sabah():
         "<blockquote><b>أذكار الصباح من أعظم ما يعين على طمأنينة القلب وحفظ العبد بإذن الله.</b></blockquote>"
     )
     caption = (
-        "<blockquote><b>🌅 أذكار الصباح</b></blockquote>\n"
-        "📋 <i>اقرأها بهدوء وتدبّر، واجعلها بدايةً ليومك مع الله.</i>"
+        "<blockquote><b>أذكار الصباح</b></blockquote>\n"
+        "🌅 <i>اقرأها بهدوء وتدبّر، واجعلها بدايةً ليومك مع الله.</i>"
     )
     with open("Zeikr/al-azkar.pdf", "rb") as f:
         send_document_bytes(f.read(), "al-azkar.pdf", caption)
@@ -192,9 +192,9 @@ def task_masa():
         "<blockquote><b>اجعل لنفسك وردًا ثابتًا من أذكار المساء، فهي من أعظم ما يملأ القلب طمأنينةً وسكينة.</b></blockquote>"
     )
     caption = (
-        "🌆 <blockquote><b>أذكار المساء</b></blockquote>\n"
+        "<blockquote><b>أذكار المساء</b></blockquote>\n"
         "━━━━━━━━━━━━━\n"
-        "📋 <i>اختم بها يومك، واستودع نفسك وأهلك عند الله.</i>"
+        "🌆 <i>اختم بها يومك، واستودع نفسك وأهلك عند الله.</i>"
     )
     with open("Zeikr/al-azkar.pdf", "rb") as f:
         send_document_bytes(f.read(), "al-azkar.pdf", caption)
