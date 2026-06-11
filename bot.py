@@ -30,13 +30,15 @@ BASE_URL         = f"https://api.telegram.org/bot{BOT_TOKEN}"
 def load_state() -> dict:
     if os.path.exists(STATE_FILE):
         with open(STATE_FILE, "r", encoding="utf-8") as f:
+            state = json.load(f)
+            state.setdefault("khatma_count", 1)  # للتوافق مع state.json القديم
             return json.load(f)
     return {"current_file": 1}
 
 def save_state(state: dict):
     with open(STATE_FILE, "w", encoding="utf-8") as f:
         json.dump(state, f, ensure_ascii=False, indent=2)
-    print(f"💾 حُفظ التقدم: ملف رقم {state['current_file']}")
+    print(f"💾 حُفظ التقدم: ملف {state['current_file']} | ختمة {state['khatma_count']}")
 
 # ─────────────────────────────────────────────
 #  Telegram helpers
@@ -80,7 +82,7 @@ def download(url: str) -> bytes:
 # ─────────────────────────────────────────────
 #  Progress bar
 # ─────────────────────────────────────────────
-def progress_bar(current: int, total: int) -> str:
+def progress_bar(current: int, total: int, khatma: int = 1) -> str:
     length    = 12
     filled    = int((current / total) * length)
     pct       = round((current / total) * 100, 1)
@@ -92,7 +94,7 @@ def progress_bar(current: int, total: int) -> str:
     else:          stars = "⭐⭐⭐⭐"
     return (
         f"<code>|{bar}|</code>  <b>{pct}%</b>  {stars}\n"
-        f"📂 <b>{current}</b> من <b>{total}</b>  •  ⏳ باقي <b>{remaining}</b>"
+        f"📂 <b>{current}</b> من <b>{total}</b>  •  ⏳ باقي <b>{remaining}</b>  •  🔖 الختمة <b>{khatma}</b>"
     )
 
 def motivational(pct: float) -> str:
