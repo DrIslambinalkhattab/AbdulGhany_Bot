@@ -123,13 +123,28 @@ def motivational(pct: float) -> str:
 #  المهمة الأولى: PDF + MP3
 # ─────────────────────────────────────────────
 def task_daily_files():
-    state     = load_state()
-    n         = state["current_file"]
-    num       = f"{n:03d}"
-    pct       = round((n / TOTAL_FILES) * 100, 1)
-    bar       = progress_bar(n, TOTAL_FILES)
-    motiv     = motivational(pct)
-    date_str  = datetime.now(CAIRO_TZ).strftime("%d / %m / %Y")
+    state  = load_state()
+    n      = state["current_file"]
+    khatma = state["khatma_count"]
+
+    # ── رسالة إتمام الختمة (لما n == TOTAL_FILES) ──
+    if n == TOTAL_FILES:
+        send_text(
+            f"🎉 <b>اكتملت الختمة {khatma} بحمد الله!</b>\n"
+            f"━━━━━━━━━━━━━━━━\n\n"
+            f"<i>«اللهم تقبّل منا — إنك أنت السميع العليم»</i>\n\n"
+            f"🔖 نبدأ الختمة <b>{khatma + 1}</b> بإذن الله...\n"
+            f"━━━━━━━━━━━━━━━━\n"
+            f"🤲 <i>اللهم اجعله في ميزان حسناتنا جميعاً</i>"
+        )
+        state["khatma_count"] = khatma + 1
+        khatma = state["khatma_count"]
+
+    num      = f"{n:03d}"
+    pct      = round((n / TOTAL_FILES) * 100, 1)
+    bar      = progress_bar(n, TOTAL_FILES, khatma)
+    motiv    = motivational(pct)
+    date_str = datetime.now(CAIRO_TZ).strftime("%d / %m / %Y")
 
     caption_pdf = (
         f"📖 <b>ختمة القرآن الكريم</b>\n"
@@ -147,10 +162,11 @@ def task_daily_files():
         f"<i>استمع وقلبك حاضر — الأجر مضاعف</i>"
     )
 
-    print(f"📤 إرسال الملف رقم {num} ({pct}%)")
+    print(f"📤 إرسال الملف رقم {num} | الختمة {khatma} ({pct}%)")
     send_document_bytes(download(f"{RELEASE_BASE}/{num}.pdf"), f"{num}.pdf", caption_pdf)
     send_audio_bytes(download(f"{RELEASE_BASE_MP3}/{num}.mp3"), f"{num}.mp3", caption_mp3)
 
+    # ── تحديث الرقم التالي (يعود لـ 1 بعد 604) ──
     state["current_file"] = (n % TOTAL_FILES) + 1
     save_state(state)
 
