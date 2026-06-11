@@ -1,0 +1,22 @@
+# .github/workflows/listener.yml
+name: Bot Listener
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'  # كل ساعة يعيد التشغيل
+
+jobs:
+  listen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55   # أقل من ساعة عشان يتجدد
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: python listener.py
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
