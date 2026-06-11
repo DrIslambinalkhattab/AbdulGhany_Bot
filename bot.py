@@ -89,8 +89,8 @@ def progress_bar(current: int, total: int, khatma: int = 1) -> str:
     bar       = "🟩" * filled + "⬜" * (length - filled)
     remaining = total - current
     return (
-        f"{bar}  <b>{pct}%</b>\n"
         f"📂 <b>{current}</b> من <b>{total}</b> • ⏳ باقي <b>{remaining}</b>"
+        f"{bar}  <b>{pct}%</b>\n"
     )
 
 def motivational(pct: float) -> str:
