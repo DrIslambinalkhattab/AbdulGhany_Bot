@@ -89,7 +89,7 @@ def progress_bar(current: int, total: int, khatma: int = 1) -> str:
     bar       = "🟩" * filled + "⬜" * (length - filled)
     remaining = total - current
     return (
-        f"<code>|{bar}|</code>  <b>{pct}%</b>  {stars}\n"
+        f"{bar}  <b>{pct}%</b>\n"
         f"📂 <b>{current}</b> من <b>{total}</b> • ⏳ باقي <b>{remaining}</b>"
     )
 
