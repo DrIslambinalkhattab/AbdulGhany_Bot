@@ -204,18 +204,17 @@ def task_masa():
 def task_friday_kahf():
     print("📖 إرسال سورة الكهف")
     send_text(
-        "🕌 <blockquote><b>جمعة مباركة</b></blockquote>\n"
-        "📖 <b>لا تنسَ سورة الكهف اليوم</b>\n\n"
+        "<blockquote><b>جمعة مباركة، لا تنسَ سورة الكهف 🕌</b></blockquote>\n"
         "━━━━━━━━━━━━━━━━\n\n"
         "<i>«مَنْ قَرَأَ سُورَةَ الْكَهْفِ فِي يَوْمِ الْجُمُعَةِ</i>\n"
         "<i>أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ»</i>\n\n"
         "━━━━━━━━━━━━━━━━\n"
-        "🤲 <blockquote><b><i>أكثر من الصلاة على النبي ﷺ، وتحرَّ ساعة الإجابة.</i></b></blockquote>"
+        "<blockquote><b><i>🤲 أكثر من الصلاة على النبي ﷺ، وتحرَّ ساعة الإجابة واجعل لعبدالغني نصيبًا من دعائك.</i></b></blockquote>"
     )
     send_document_bytes(download(f"{RELEASE_KAHF}/al-kahf.pdf"), "al-kahf.pdf",
-        "📗 <blockquote><b>سورة الكهف</b></blockquote>\n━━━━━━━━━━━━━━━━\n<i>أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ</i>")
+        "<blockquote><b>📗 سورة الكهف</b></blockquote>")
     send_audio_bytes(download(f"{RELEASE_KAHF}/al-kahf.mp3"), "al-kahf.mp3",
-        "🎧 <blockquote><b>تلاوة سورة الكهف</b></blockquote>\n━━━━━━━━━━━━━━━━\n<i>«استمع للسورة وتدبّر آياتها.»</i>")
+        "<blockquote><b>🎧 تلاوة سورة الكهف</b></blockquote>")
 
 # ─────────────────────────────────────────────
 #  التذكيرات
