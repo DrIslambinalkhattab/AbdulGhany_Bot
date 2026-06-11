@@ -135,17 +135,16 @@ def task_daily_files():
     date_str = datetime.now(CAIRO_TZ).strftime("%d / %m / %Y")
 
     caption_pdf = (
-        f"📖 <blockquote><b>الورد اليومي</b></blockquote>\n"
+        f"<blockquote><b>📖 الورد اليومي</b></blockquote>\n"
         f"🗓 <i>{date_str}</i>   •   📂 الورد الـ <b>{num}</b>\n\n"
-        f"━━━━━━━━━━━━━━━━\n"
-        f"📊 <b>تقدّمك في الختمة</b>\n\n"
+        f"<blockquote><b>📊 تقدّمك في الختمة</b></blockquote>\n\n"
         f"{bar}\n\n"
-        f"{motiv}\n"
         f"━━━━━━━━━━━━━━━━\n"
-        f"🤲 <blockquote><b>نسأل الله أن يجعله نورًا في قلوبنا، وبركةً في أيامنا.</b></blockquote>"
+        f"{motiv}\n"
+        f"<blockquote><b>🤲 نسأل الله أن يجعله نورًا في قلوبنا، وبركةً في أيامنا.</b></blockquote>"
     )
     caption_mp3 = (
-        f"🎧 <blockquote><b>تلاوة الورد الـ {num}</b></blockquote>\n"
+        f"<blockquote><b>🎧 تلاوة الورد الـ {num}</b></blockquote>\n"
         f"<i>«وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا»</i>\n"
         f"━━━━━━━━━━━━━━━━\n"
         f"<i>استمع بتدبّر، واجعل لك نصيبًا من كلام الله كل يوم.</i>"
