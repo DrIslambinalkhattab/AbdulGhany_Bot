@@ -86,15 +86,11 @@ def progress_bar(current: int, total: int, khatma: int = 1) -> str:
     length    = 12
     filled    = int((current / total) * length)
     pct       = round((current / total) * 100, 1)
-    bar       = "█" * filled + "░" * (length - filled)
+    bar       = "🟩" * filled + "⬜" * (length - filled)
     remaining = total - current
-    if pct < 25:   stars = "⭐"
-    elif pct < 50: stars = "⭐⭐"
-    elif pct < 75: stars = "⭐⭐⭐"
-    else:          stars = "⭐⭐⭐⭐"
     return (
         f"<code>|{bar}|</code>  <b>{pct}%</b>  {stars}\n"
-        f"📂 <b>{current}</b> من <b>{total}</b>  •  ⏳ باقي <b>{remaining}</b>"
+        f"📂 <b>{current}</b> من <b>{total}</b> • ⏳ باقي <b>{remaining}</b>"
     )
 
 def motivational(pct: float) -> str:
@@ -136,8 +132,8 @@ def task_daily_files():
     date_str = datetime.now(CAIRO_TZ).strftime("%d / %m / %Y")
 
     caption_pdf = (
-        f"<blockquote><b>📖 الورد اليومي الختمة الـ{khatma}</b></blockquote>\n"
-        f"🗓 <i>{date_str}</i>   •   📂الورد الـ <b>{num}</b>\n"
+        f"<blockquote><b>  📖 الورد اليومي الختمة الـ{khatma}</b></blockquote>\n"
+        f"🗓 <i>{date_str}</i> • 📂 الورد الـ<b>{num}</b>\n"
         f"<blockquote><b>📊 تقدّمك في الختمة</b></blockquote>\n"
         f"{bar}\n"
         f"━━━━━━━━━━━━━━━━\n"
@@ -179,8 +175,7 @@ def task_sabah():
         "<blockquote><b>أذكار الصباح من أعظم ما يعين على طمأنينة القلب وحفظ العبد بإذن الله.</b></blockquote>"
     )
     caption = (
-        "🌅 <blockquote><b>أذكار الصباح</b></blockquote>\n"
-        "━━━━━━━━━━━━━\n"
+        "<blockquote><b>🌅 أذكار الصباح</b></blockquote>\n"
         "📋 <i>اقرأها بهدوء وتدبّر، واجعلها بدايةً ليومك مع الله.</i>"
     )
     with open("Zeikr/al-azkar.pdf", "rb") as f:
