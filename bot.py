@@ -141,7 +141,7 @@ def task_daily_files():
         f"<blockquote><b>🤲 نسأل الله أن يجعله نورًا في قلوبنا، وبركةً في أيامنا.</b></blockquote>"
     )
     caption_mp3 = (
-        f"<blockquote><b>🎧 تلاوة الورد الـ {num}</b></blockquote>\n"
+        f"<blockquote><b>🎧تلاوة الورد الـ {num}</b></blockquote>\n"
     )
 
     # 2. إرسال الملفات أولاً
@@ -193,7 +193,6 @@ def task_masa():
     )
     caption = (
         "<blockquote><b>أذكار المساء</b></blockquote>\n"
-        "━━━━━━━━━━━━━\n"
         "🌆 <i>اختم بها يومك، واستودع نفسك وأهلك عند الله.</i>"
     )
     with open("Zeikr/al-azkar.pdf", "rb") as f:
