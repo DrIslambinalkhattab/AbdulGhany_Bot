@@ -163,7 +163,9 @@ def task_sabah():
         "<blockquote><b>أذكار الصباح من أعظم ما يعين على طمأنينة القلب وحفظ العبد بإذن الله.</b></blockquote>"
     )
     caption = (
-        "🌅 <blockquote><b>اقرأها بتأمل — كل ذكر له أثر</b></blockquote>"
+        "🌅 <blockquote><b>أذكار الصباح</b></blockquote>\n"
+        "━━━━━━━━━━━━━\n"
+        "📋 <i>اقرأها بهدوء وتدبّر، واجعلها بدايةً ليومك مع الله.</i>"
     )
     with open("Zeikr/al-azkar.pdf", "rb") as f:
         send_document_bytes(f.read(), "al-azkar.pdf", caption)
@@ -179,7 +181,9 @@ def task_masa():
         "<blockquote><b>أذكار الصباح من أعظم ما يعين على طمأنينة القلب وحفظ العبد بإذن الله.</b></blockquote>"
     )
     caption = (
-        "🌆 <blockquote><b>اقرأها بتأمل — كل ذكر له أثر</b></blockquote>"
+        "🌆 <blockquote><b>أذكار المساء</b></blockquote>\n"
+        "━━━━━━━━━━━━━\n"
+        "📋 <i>اختم بها يومك، واستودع نفسك وأهلك عند الله.</i>"
     )
     with open("Zeikr/al-azkar.pdf", "rb") as f:
         send_document_bytes(f.read(), "al-azkar.pdf", caption)
