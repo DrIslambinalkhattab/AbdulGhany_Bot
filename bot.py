@@ -136,8 +136,8 @@ def task_daily_files():
     date_str = datetime.now(CAIRO_TZ).strftime("%d / %m / %Y")
 
     caption_pdf = (
-        f"<blockquote><b>📖 الورد اليومي • 🔖 الختمة{khatma}<</b></blockquote>\n"
-        f"🗓 <i>{date_str}</i>   •   📂 الورد الـ <b>{num}</b>\n"
+        f"<blockquote><b>📖 الورد اليومي • 🔖 الختمة {khatma}</b></blockquote>\n"
+        f"🗓 <i>{date_str}</i>   •   📂الورد الـ <b>{num}</b>\n"
         f"<blockquote><b>📊 تقدّمك في الختمة</b></blockquote>\n"
         f"{bar}\n"
         f"━━━━━━━━━━━━━━━━\n"
@@ -157,12 +157,11 @@ def task_daily_files():
     if n == TOTAL_FILES:
         state["khatma_count"] += 1
         send_text(
-            f"🎉 <b>اكتملت الختمة {khatma} بحمد الله!</b>\n"
-            f"━━━━━━━━━━━━━━━━\n\n"
-            f"<i>«اللهم تقبّل منا — إنك أنت السميع العليم»</i>\n\n"
-            f"🔖 نبدأ الختمة <b>{state['khatma_count']}</b> بإذن الله...\n"
-            f"━━━━━━━━━━━━━━━━\n"
-            f"🤲 <i>اللهم اجعله في ميزان حسناتنا جميعاً</i>"
+            f"<blockquote><b>🎉 بفضل الله اكتملت الختمة رقم {khatma}</b></blockquote>\n"
+            f"📖 <i>نسأل الله أن يجعل القرآن ربيع قلوبنا، ونور صدورنا، وأن يتقبله منا خالصًا لوجهه الكريم.</i>\n\n"
+            f"🌱 <b>ومن أجمل ما في الطريق إلى الله أن الختمة لا تكون نهاية، بل بداية لختمة جديدة.</b>\n\n"
+            f"🔖 <b>غدًا بإذن الله نبدأ الختمة رقم {state['khatma_count']}، نسأل الله أن يبارك لنا فيها وأن يبلغنا تمامها.</b>\n\n"
+            f"<blockquote><b>🤲 اللهم تقبّل منا إنك أنت السميع العليم، وتب علينا إنك أنت التواب الرحيم.</b></blockquote>"
         )
 
     # 4. تحديث حالة الملفات للمرة القادمة وحفظ الـ state
