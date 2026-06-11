@@ -94,7 +94,7 @@ def progress_bar(current: int, total: int, khatma: int = 1) -> str:
     else:          stars = "⭐⭐⭐⭐"
     return (
         f"<code>|{bar}|</code>  <b>{pct}%</b>  {stars}\n"
-        f"📂 <b>{current}</b> من <b>{total}</b>  •  ⏳ باقي <b>{remaining}</b>  •  🔖 الختمة <b>{khatma}</b>"
+        f"📂 <b>{current}</b> من <b>{total}</b>  •  ⏳ باقي <b>{remaining}</b>"
     )
 
 def motivational(pct: float) -> str:
@@ -136,7 +136,7 @@ def task_daily_files():
     date_str = datetime.now(CAIRO_TZ).strftime("%d / %m / %Y")
 
     caption_pdf = (
-        f"<blockquote><b>📖 الورد اليومي | {khatma}<</b></blockquote>\n"
+        f"<blockquote><b>📖 الورد اليومي • 🔖 الختمة{khatma}<</b></blockquote>\n"
         f"🗓 <i>{date_str}</i>   •   📂 الورد الـ <b>{num}</b>\n"
         f"<blockquote><b>📊 تقدّمك في الختمة</b></blockquote>\n"
         f"{bar}\n"
