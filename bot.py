@@ -31,9 +31,9 @@ def load_state() -> dict:
     if os.path.exists(STATE_FILE):
         with open(STATE_FILE, "r", encoding="utf-8") as f:
             state = json.load(f)
-            state.setdefault("khatma_count", 1)  # للتوافق مع state.json القديم
-            return json.load(f)
-    return {"current_file": 1}
+        state.setdefault("khatma_count", 1)
+        return state
+    return {"current_file": 1, "khatma_count": 1}
 
 def save_state(state: dict):
     with open(STATE_FILE, "w", encoding="utf-8") as f:
