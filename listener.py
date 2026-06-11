@@ -3,12 +3,24 @@ listener.py — يراقب الأحداث ويبعت notifications للأدمن
 """
 
 import os
+import json
 import time
 import requests
 
-BOT_TOKEN  = os.environ["BOT_TOKEN"]
-ADMIN_ID   = os.environ["ADMIN_CHAT_ID"]   # ID بتاعك الشخصي
-BASE_URL   = f"https://api.telegram.org/bot{BOT_TOKEN}"
+BOT_TOKEN   = os.environ["BOT_TOKEN"]
+ADMIN_ID    = os.environ["ADMIN_CHAT_ID"]
+BASE_URL    = f"https://api.telegram.org/bot{BOT_TOKEN}"
+OFFSET_FILE = "listener_offset.json"
+
+def load_offset() -> int:
+    if os.path.exists(OFFSET_FILE):
+        with open(OFFSET_FILE) as f:
+            return json.load(f).get("offset", 0)
+    return 0
+
+def save_offset(offset: int):
+    with open(OFFSET_FILE, "w") as f:
+        json.dump({"offset": offset}, f)
 
 def send_admin(text: str):
     """يبعت رسالة لك أنت مباشرة"""
@@ -51,8 +63,8 @@ def process_update(update: dict):
         )
 
 def run_polling():
-    offset = 0
-    print("👂 بدأ الاستماع للأحداث...")
+    offset = load_offset()
+    print(f"👂 بدأ الاستماع للأحداث... (offset: {offset})")
     while True:
         try:
             r = requests.get(f"{BASE_URL}/getUpdates", params={
@@ -64,6 +76,7 @@ def run_polling():
             for update in updates:
                 process_update(update)
                 offset = update["update_id"] + 1
+                save_offset(offset)
         except Exception as e:
             print(f"⚠️ خطأ: {e}")
             time.sleep(5)
