@@ -136,9 +136,9 @@ def task_daily_files():
 
     caption_pdf = (
         f"<blockquote><b>📖 الورد اليومي</b></blockquote>\n"
-        f"🗓 <i>{date_str}</i>   •   📂 الورد الـ <b>{num}</b>\n\n"
-        f"<blockquote><b>📊 تقدّمك في الختمة</b></blockquote>\n\n"
-        f"{bar}\n\n"
+        f"🗓 <i>{date_str}</i>   •   📂 الورد الـ <b>{num}</b>\n"
+        f"<blockquote><b>📊 تقدّمك في الختمة</b></blockquote>\n"
+        f"{bar}\n"
         f"━━━━━━━━━━━━━━━━\n"
         f"{motiv}\n"
         f"<blockquote><b>🤲 نسأل الله أن يجعله نورًا في قلوبنا، وبركةً في أيامنا.</b></blockquote>"
