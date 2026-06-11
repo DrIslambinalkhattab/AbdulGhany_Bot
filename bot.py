@@ -32,6 +32,7 @@ def load_state() -> dict:
         with open(STATE_FILE, "r", encoding="utf-8") as f:
             state = json.load(f)
         state.setdefault("khatma_count", 1)
+        state.setdefault("zikr_index", 0) 
         return state
     return {"current_file": 1, "khatma_count": 1}
 
@@ -340,16 +341,19 @@ AZKAAR = [
 ]
 
 def task_hourly_zikr():
-    now  = datetime.now(CAIRO_TZ)
-    idx  = (now.hour + now.day) % len(AZKAAR)
+    state = load_state()
+    idx   = state["zikr_index"]
+
     icon, zikr, hadith = AZKAAR[idx]
     msg = (
-        #f"{icon} <b>ذكر الساعة</b>\n"
         f"<blockquote><b>{zikr}</b></blockquote>\n"
         f"<i><b>{hadith}</b></i>\n"
     )
-    print("📿 إرسال الذكر العشوائي")
+    print(f"📿 إرسال الذكر رقم {idx + 1} من {len(AZKAAR)}")
     send_text(msg)
+
+    state["zikr_index"] = (idx + 1) % len(AZKAAR)
+    save_state(state)
 
 # ─────────────────────────────────────────────
 #  نقطة الدخول
