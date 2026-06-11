@@ -127,19 +127,7 @@ def task_daily_files():
     n      = state["current_file"]
     khatma = state["khatma_count"]
 
-    # ── رسالة إتمام الختمة (لما n == TOTAL_FILES) ──
-    if n == TOTAL_FILES:
-        send_text(
-            f"🎉 <b>اكتملت الختمة {khatma} بحمد الله!</b>\n"
-            f"━━━━━━━━━━━━━━━━\n\n"
-            f"<i>«اللهم تقبّل منا — إنك أنت السميع العليم»</i>\n\n"
-            f"🔖 نبدأ الختمة <b>{khatma + 1}</b> بإذن الله...\n"
-            f"━━━━━━━━━━━━━━━━\n"
-            f"🤲 <i>اللهم اجعله في ميزان حسناتنا جميعاً</i>"
-        )
-        state["khatma_count"] = khatma + 1
-        khatma = state["khatma_count"]
-
+    # 1. تحضير البيانات والنصوص بناءً على الحالة الحالية
     num      = f"{n:03d}"
     pct      = round((n / TOTAL_FILES) * 100, 1)
     bar      = progress_bar(n, TOTAL_FILES, khatma)
@@ -162,11 +150,24 @@ def task_daily_files():
         f"<i>استمع وقلبك حاضر — الأجر مضاعف</i>"
     )
 
+    # 2. إرسال الملفات أولاً
     print(f"📤 إرسال الملف رقم {num} | الختمة {khatma} ({pct}%)")
     send_document_bytes(download(f"{RELEASE_BASE}/{num}.pdf"), f"{num}.pdf", caption_pdf)
     send_audio_bytes(download(f"{RELEASE_BASE_MP3}/{num}.mp3"), f"{num}.mp3", caption_mp3)
 
-    # ── تحديث الرقم التالي (يعود لـ 1 بعد 604) ──
+    # 3. التحقق من اكتمال الختمة وإرسال التهنئة (بعد إرسال الملفات)
+    if n == TOTAL_FILES:
+        state["khatma_count"] += 1
+        send_text(
+            f"🎉 <b>اكتملت الختمة {khatma} بحمد الله!</b>\n"
+            f"━━━━━━━━━━━━━━━━\n\n"
+            f"<i>«اللهم تقبّل منا — إنك أنت السميع العليم»</i>\n\n"
+            f"🔖 نبدأ الختمة <b>{state['khatma_count']}</b> بإذن الله...\n"
+            f"━━━━━━━━━━━━━━━━\n"
+            f"🤲 <i>اللهم اجعله في ميزان حسناتنا جميعاً</i>"
+        )
+
+    # 4. تحديث حالة الملفات للمرة القادمة وحفظ الـ state
     state["current_file"] = (n % TOTAL_FILES) + 1
     save_state(state)
 
@@ -196,7 +197,7 @@ def task_masa():
     send_text(
         "<blockquote><b>أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ</b></blockquote>\n"
         "🤍 <i>اختم نهارك بذكر الله</i>\n"
-        "<blockquote><b>أذكار الصباح من أعظم ما يعين على طمأنينة القلب وحفظ العبد بإذن الله.</b></blockquote>"
+        "<blockquote><b>اجعل لنفسك وردًا ثابتًا من أذكار المساء، فهي من أعظم ما يملأ القلب طمأنينةً وسكينة.</b></blockquote>"
     )
     caption = (
         "🌆 <blockquote><b>أذكار المساء</b></blockquote>\n"
