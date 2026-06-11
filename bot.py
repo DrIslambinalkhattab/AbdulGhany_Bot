@@ -83,7 +83,7 @@ def download(url: str) -> bytes:
 #  Progress bar
 # ─────────────────────────────────────────────
 def progress_bar(current: int, total: int, khatma: int = 1) -> str:
-    length    = 12
+    length    = 8
     filled    = int((current / total) * length)
     pct       = round((current / total) * 100, 1)
     bar       = "🟩" * filled + "⬜" * (length - filled)
@@ -134,8 +134,8 @@ def task_daily_files():
     caption_pdf = (
         f"<blockquote><b>  📖 الورد اليومي الختمة الـ{khatma}</b></blockquote>\n"
         f"🗓 <i>{date_str}</i> • 📂 الورد الـ<b>{num}</b>\n"
-        f"<blockquote><b>📊 تقدّمك في الختمة</b></blockquote>\n"
-        f"{bar}\n"
+        f"━━━━━━━━━━━━━━━━\n"
+        f"<b>📊 تقدّمك:</b> {bar}  <b>{pct}%</b>\n"
         f"━━━━━━━━━━━━━━━━\n"
         f"{motiv}\n"
         f"<blockquote><b>🤲 نسأل الله أن يجعله نورًا في قلوبنا، وبركةً في أيامنا.</b></blockquote>"
