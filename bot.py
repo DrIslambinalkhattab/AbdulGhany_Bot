@@ -309,7 +309,7 @@ def task_friday_salah(slot: str = ""):
     # fallback لو اتشغل يدوياً بدون slot
     if slot not in slots:
         hour = datetime.now(CAIRO_TZ).hour
-        slot = "fajr" if hour < 9 else "morning" if hour < 12 else "midday" if hour < 15 else "asr"
+        slot = "fajr" if hour < 7 else "morning" if hour < 12 else "midday" if hour < 15 else "asr"
     send_text(slots[slot])
 
 # ─────────────────────────────────────────────

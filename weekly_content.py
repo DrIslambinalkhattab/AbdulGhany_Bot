@@ -3,8 +3,6 @@ import sys
 import requests
 from datetime import datetime
 import pytz
-import random
-
 # جلب المتغيرات (تنظيف المسافات المخفية)
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 CHAT_ID = os.environ.get("CHAT_ID", "-1003844022713")
@@ -21,6 +19,28 @@ def send_text(text: str):
         data={**_base_params(), "text": text, "parse_mode": "HTML"},
     )
     print(f"📨 {r.status_code}")
+
+def send_error_alert(task_name: str, error: Exception):
+    """يُرسل تنبيه خطأ في الشات مع mention للمسؤول"""
+    import traceback
+    tb = traceback.format_exc()[-800:]
+    msg = (
+        f"⚠️ <b>خطأ في مهمة:</b> <code>{task_name}</code>\n"
+        f"━━━━━━━━━━━━━━━━\n"
+        f"<b>النوع:</b> <code>{type(error).__name__}</code>\n"
+        f"<b>التفاصيل:</b> <code>{str(error)[:300]}</code>\n"
+        f"━━━━━━━━━━━━━━━━\n"
+        f"<pre>{tb}</pre>\n"
+        f"━━━━━━━━━━━━━━━━\n"
+        f"🔔 <a href='https://t.me/DrIslambinalkhattab_1'>@DrIslambinalkhattab_1</a> راجع الأمر."
+    )
+    try:
+        requests.post(
+            f"{BASE_URL}/sendMessage",
+            data={**_base_params(), "text": msg, "parse_mode": "HTML"},
+        )
+    except Exception as e:
+        print(f"❌ فشل إرسال تنبيه الخطأ: {e}")
 
 # ─────────────────────────────────────────────
 #  تذكير الصيام
@@ -58,11 +78,11 @@ FASTING_MSGS = {
 
 def task_remind_fasting_monday():
     print("🌙 تذكير صيام الاثنين")
-    send_text(random.choice(FASTING_MSGS["monday"]))
+    send_text(FASTING_MSGS["monday"][0])
 
 def task_remind_fasting_thursday():
     print("🌙 تذكير صيام الخميس")
-    send_text(random.choice(FASTING_MSGS["thursday"]))
+    send_text(FASTING_MSGS["thursday"][0])
 
 # ─────────────────────────────────────────────
 #  نقطة الدخول
@@ -79,5 +99,10 @@ if __name__ == "__main__":
     
     task = sys.argv[1]
     print(f"▶️  {task}")
-    TASKS[task]()
-    print("✅ انتهت المهمة")
+    try:
+        TASKS[task]()
+        print("✅ انتهت المهمة")
+    except Exception as e:
+        print(f"❌ خطأ في المهمة '{task}': {e}")
+        send_error_alert(task, e)
+        sys.exit(1)
