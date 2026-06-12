@@ -14,8 +14,8 @@ import random
 #  الإعدادات
 # ─────────────────────────────────────────────
 BOT_TOKEN        = os.environ["BOT_TOKEN"]
-CHAT_ID          = os.environ.get("CHAT_ID", "-1003844022713")
-TOPIC_ID         = os.environ.get("TOPIC_ID", "33")
+CHAT_ID  = os.environ.get("CHAT_ID",  "-1001949919685")
+TOPIC_ID = os.environ.get("TOPIC_ID", "25894")
 RELEASE_BASE     = os.environ.get("RELEASE_BASE", "")
 RELEASE_BASE_MP3 = os.environ.get("RELEASE_BASE_MP3", "")
 RELEASE_KAHF     = os.environ.get("RELEASE_KAHF", "")
@@ -190,7 +190,7 @@ def task_daily_files():
         f"<blockquote><b>🤲 نسأل الله أن يجعله نورًا في قلوبنا، وبركةً في أيامنا.</b></blockquote>"
     )
     caption_mp3 = (
-        f"<blockquote><b>🎧تلاوة الورد الـ {num}</b></blockquote>\n"
+        f"<blockquote><b>🎧 تلاوة الورد الـ{num}</b></blockquote>"
     )
 
     # 2. إرسال الملفات أولاً
