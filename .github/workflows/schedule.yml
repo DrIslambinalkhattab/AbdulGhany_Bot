@@ -84,6 +84,7 @@ jobs:
           git config user.name  "AbdulGhanyBot"
           git config user.email "abdulghanybot@github.com"
           git add state.json
+          git pull --rebase origin main
           git diff --staged --quiet || git commit -m "📊 تحديث التقدم: $(cat state.json)"
           git push
 
@@ -270,6 +271,7 @@ jobs:
           git config user.name  "AbdulGhanyBot"
           git config user.email "abdulghanybot@github.com"
           git add state.json
+          git pull --rebase origin main
           git diff --staged --quiet || git commit -m "📿 تحديث الذكر: $(cat state.json)"
           git push
 
