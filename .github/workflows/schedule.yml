@@ -104,8 +104,6 @@ jobs:
           BOT_TOKEN:    ${{ secrets.BOT_TOKEN }}
           CHAT_ID:      ${{ secrets.CHAT_ID }}
           TOPIC_ID:     ${{ secrets.TOPIC_ID }}
-          RELEASE_BASE:  ${{ secrets.RELEASE_BASE }}
-          RELEASE_AZKAR: ${{ secrets.RELEASE_AZKAR }}
         run: python bot.py sabah
 
   masa:
@@ -124,8 +122,6 @@ jobs:
           BOT_TOKEN:    ${{ secrets.BOT_TOKEN }}
           CHAT_ID:      ${{ secrets.CHAT_ID }}
           TOPIC_ID:     ${{ secrets.TOPIC_ID }}
-          RELEASE_BASE:  ${{ secrets.RELEASE_BASE }}
-          RELEASE_AZKAR: ${{ secrets.RELEASE_AZKAR }}
         run: python bot.py masa
 
   kahf:
