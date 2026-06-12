@@ -73,11 +73,6 @@ TASKS = {
     "fasting_thursday": task_remind_fasting_thursday,
 }
 
-TASKS = {
-    "fasting_monday": task_remind_fasting_monday,
-    "fasting_thursday": task_remind_fasting_thursday,
-}
-
 if __name__ == "__main__":
     if len(sys.argv) < 2 or sys.argv[1] not in TASKS:
         print(f"الاستخدام: python weekly_content.py <{'|'.join(TASKS)}>")
