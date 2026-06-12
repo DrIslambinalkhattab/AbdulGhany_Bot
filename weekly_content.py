@@ -17,6 +17,7 @@ def send_text(text: str):
     r = requests.post(
         f"{BASE_URL}/sendMessage",
         data={**_base_params(), "text": text, "parse_mode": "HTML"},
+        timeout=10,
     )
     print(f"📨 {r.status_code}")
 
