@@ -34,7 +34,7 @@ def load_state() -> dict:
         state.setdefault("khatma_count", 1)
         state.setdefault("zikr_index", 0) 
         return state
-    return {"current_file": 1, "khatma_count": 1}
+    return {"current_file": 1, "khatma_count": 1, "zikr_index": 0}
 
 def save_state(state: dict):
     with open(STATE_FILE, "w", encoding="utf-8") as f:
