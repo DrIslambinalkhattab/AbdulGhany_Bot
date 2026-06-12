@@ -308,8 +308,12 @@ def task_friday_salah(slot: str = ""):
                 "🤍 <i>جمعة مباركة على الجميع</i>"),
     }
     # fallback لو اتشغل يدوياً بدون slot
+    if not slot:
+        slot = "morning"
+        
     if slot not in slots:
-        raise ValueError(f"❌ slot غير معروف: '{slot}' — القيم المتاحة: {list(slots.keys())}")
+        raise ValueError(f"❌ slot غير معروف: '{slot}' — القيم المتاحة هي: {list(slots.keys())}")
+    
     send_text(slots[slot])
 
 # ─────────────────────────────────────────────
