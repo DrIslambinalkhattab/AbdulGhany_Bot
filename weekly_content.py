@@ -5,8 +5,8 @@ from datetime import datetime
 import pytz
 # جلب المتغيرات (تنظيف المسافات المخفية)
 BOT_TOKEN = os.environ["BOT_TOKEN"]
-CHAT_ID = os.environ.get("CHAT_ID", "-1003844022713")
-TOPIC_ID = os.environ.get("TOPIC_ID", "33")
+CHAT_ID  = os.environ.get("CHAT_ID",  "-1001949919685")
+TOPIC_ID = os.environ.get("TOPIC_ID", "25894")
 CAIRO_TZ = pytz.timezone("Africa/Cairo")
 BASE_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
