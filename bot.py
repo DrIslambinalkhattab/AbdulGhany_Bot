@@ -259,36 +259,36 @@ def task_remind_night():
 # ─────────────────────────────────────────────
 #  الصلاة على النبي ﷺ يوم الجمعة
 # ─────────────────────────────────────────────
-def task_friday_salah():
-    now  = datetime.now(CAIRO_TZ)
-    hour = now.hour
-    if hour < 8:
-        msg = ("<blockquote><b>فجر الجمعة المباركة 🌙</b></blockquote>\n"
-               "<b>اللهم صلِّ وسلم وبارك على نبينا محمد 💛</b>\n"
-               "━━━━━━━━━━━━━━━━\n"
-               "<i>«من صلى عليّ صلاةً واحدة صلى الله عليه بها عشرًا»</i>\n"
-               "<i>أكثروا من الصلاة على النبي ﷺ في يوم الجمعة 🤍</i>")
-    elif hour < 12:
-        msg = ("<blockquote><b>صباح الجمعة ☀️</b></blockquote>\n"
-               "<b>لا تنسَ قراءة سورة الكهف 📖</b>\n"
-               "━━━━━━━━━━━━━━━━\n"
-               "<i>اللهم صلِّ وسلم وبارك على نبينا محمد ﷺ</i>\n"
-               "<i>كما صليت على إبراهيم وعلى آل إبراهيم إنك حميد مجيد 🤍</i>\n")
-    elif hour < 15:
-        msg = ("🌤 <b>ظهر الجمعة</b>\n"
-               "<b>لا تنسَ الدعاء، ففي الجمعة ساعةٌ لا يُرد فيها الدعاء 🤲</b>\n"
-               "━━━━━━━━━━━━━━━━\n"
-               "<i>«من صلى عليّ صلاةً واحدة صلى الله عليه بها عشرًا»</i>\n"
-               "<i>أكثر من الدعاء لك ولأحبابك وللمسلمين جميعًا 🤍</i>")
-    else:
-        msg = ("🌆 <b>عصر الجمعة</b>\n"
-               "<b>تقترب ساعات الجمعة من نهايتها… 🌿</b>\n"
-               "━━━━━━━━━━━━━━━━\n"
-               "أكثروا من الصلاة على النبي ﷺ\n"
-               "<i>«إن لله ملائكة سيّاحين في الأرض يُبلّغوني من أمتي السلام»</i>\n"
-               "🌹 <i>صلاة واحدة — تبلغه ﷺ سلامك</i>\n"
-               "🤍 <i>جمعة مباركة على الجميع</i>")
-    send_text(msg)
+def task_friday_salah(slot: str = ""):
+    slots = {
+        "fajr": ("<blockquote><b>فجر الجمعة المباركة 🌙</b></blockquote>\n"
+                 "<b>اللهم صلِّ وسلم وبارك على نبينا محمد 💛</b>\n"
+                 "━━━━━━━━━━━━━━━━\n"
+                 "<i>«من صلى عليّ صلاةً واحدة صلى الله عليه بها عشرًا»</i>\n"
+                 "<i>أكثروا من الصلاة على النبي ﷺ في يوم الجمعة 🤍</i>"),
+        "morning": ("<blockquote><b>صباح الجمعة ☀️</b></blockquote>\n"
+                    "<b>لا تنسَ قراءة سورة الكهف 📖</b>\n"
+                    "━━━━━━━━━━━━━━━━\n"
+                    "<i>اللهم صلِّ وسلم وبارك على نبينا محمد ﷺ</i>\n"
+                    "<i>كما صليت على إبراهيم وعلى آل إبراهيم إنك حميد مجيد 🤍</i>\n"),
+        "midday": ("🌤 <b>ظهر الجمعة</b>\n"
+                   "<b>لا تنسَ الدعاء، ففي الجمعة ساعةٌ لا يُرد فيها الدعاء 🤲</b>\n"
+                   "━━━━━━━━━━━━━━━━\n"
+                   "<i>«من صلى عليّ صلاةً واحدة صلى الله عليه بها عشرًا»</i>\n"
+                   "<i>أكثر من الدعاء لك ولأحبابك وللمسلمين جميعًا 🤍</i>"),
+        "asr": ("🌆 <b>عصر الجمعة</b>\n"
+                "<b>تقترب ساعات الجمعة من نهايتها… 🌿</b>\n"
+                "━━━━━━━━━━━━━━━━\n"
+                "أكثروا من الصلاة على النبي ﷺ\n"
+                "<i>«إن لله ملائكة سيّاحين في الأرض يُبلّغوني من أمتي السلام»</i>\n"
+                "🌹 <i>صلاة واحدة — تبلغه ﷺ سلامك</i>\n"
+                "🤍 <i>جمعة مباركة على الجميع</i>"),
+    }
+    # fallback لو اتشغل يدوياً بدون slot
+    if slot not in slots:
+        hour = datetime.now(CAIRO_TZ).hour
+        slot = "fajr" if hour < 9 else "morning" if hour < 12 else "midday" if hour < 15 else "asr"
+    send_text(slots[slot])
 
 # ─────────────────────────────────────────────
 #  ذكر الساعة
@@ -356,15 +356,19 @@ def task_hourly_zikr():
 #  نقطة الدخول
 # ─────────────────────────────────────────────
 TASKS = {
-    "daily_files"    : task_daily_files,
-    "sabah"          : task_sabah,
-    "masa"           : task_masa,
-    "kahf"           : task_friday_kahf,
-    "remind_morning" : task_remind_morning,
-    "remind_midday"  : task_remind_midday,
-    "remind_night"   : task_remind_night,
-    "friday_salah"   : task_friday_salah,
-    "hourly_zikr"    : task_hourly_zikr,
+    "daily_files"          : task_daily_files,
+    "sabah"                : task_sabah,
+    "masa"                 : task_masa,
+    "kahf"                 : task_friday_kahf,
+    "remind_morning"       : task_remind_morning,
+    "remind_midday"        : task_remind_midday,
+    "remind_night"         : task_remind_night,
+    "friday_salah"         : task_friday_salah,
+    "friday_salah_fajr"    : lambda: task_friday_salah("fajr"),
+    "friday_salah_morning" : lambda: task_friday_salah("morning"),
+    "friday_salah_midday"  : lambda: task_friday_salah("midday"),
+    "friday_salah_asr"     : lambda: task_friday_salah("asr"),
+    "hourly_zikr"          : task_hourly_zikr,
 }
 
 if __name__ == "__main__":
