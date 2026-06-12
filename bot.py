@@ -45,6 +45,17 @@ def save_state(state: dict):
 # ─────────────────────────────────────────────
 #  Telegram helpers
 # ─────────────────────────────────────────────
+def _base_params() -> dict:
+    return {"chat_id": CHAT_ID, "message_thread_id": TOPIC_ID}
+
+def send_text(text: str):
+    r = requests.post(
+        f"{BASE_URL}/sendMessage",
+        data={**_base_params(), "text": text, "parse_mode": "HTML"},
+        timeout=10,
+    )
+    print(f"📨 {r.status_code}")
+
 def send_error_alert(task_name: str, error: Exception):
     """يُرسل تنبيه خطأ في الشات مع mention للمسؤول بشكل آمن تماماً"""
     import traceback
@@ -109,8 +120,12 @@ def send_audio_bytes(data: bytes, filename: str, caption: str = ""):
 def download(url: str) -> bytes:
     print(f"⬇️  جاري التحميل: {url}")
     headers = {"Accept": "application/octet-stream", "User-Agent": "Mozilla/5.0"}
-    r = requests.get(url, headers=headers, allow_redirects=True)
-    print(f"   {'✅' if r.status_code==200 else '❌'} {len(r.content)//1024} KB | {r.status_code}")
+    r = requests.get(url, headers=headers, allow_redirects=True, timeout=60)
+    r.raise_for_status()
+    size_kb = len(r.content) // 1024
+    print(f"   ✅ {size_kb} KB | {r.status_code}")
+    if size_kb > 50 * 1024:
+        raise ValueError(f"الملف أكبر من 50 MB ({size_kb} KB) — تليجرام سيرفضه")
     return r.content
 
 # ─────────────────────────────────────────────
