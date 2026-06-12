@@ -45,38 +45,48 @@ def save_state(state: dict):
 # ─────────────────────────────────────────────
 #  Telegram helpers
 # ─────────────────────────────────────────────
-def _base_params() -> dict:
-    return {"chat_id": CHAT_ID, "message_thread_id": TOPIC_ID}
-
-def send_text(text: str):
-    r = requests.post(
-        f"{BASE_URL}/sendMessage",
-        data={**_base_params(), "text": text, "parse_mode": "HTML"},
-    )
-    print(f"📨 نص: {r.status_code}")
-
 def send_error_alert(task_name: str, error: Exception):
-    """يُرسل تنبيه خطأ في الشات مع mention للمسؤول"""
+    """يُرسل تنبيه خطأ في الشات مع mention للمسؤول بشكل آمن تماماً"""
     import traceback
-    tb = traceback.format_exc()[-800:]  # آخر 800 حرف فقط عشان ما تتجاوزش الحد
+    import html
+
+    # 1. جلب الـ Traceback بأمان والتعامل معه بنظافة
+    raw_tb = traceback.format_exc()
+    if not raw_tb or raw_tb.strip() == "NoneType: None":
+        # إذا لم يكن هناك traceback (تم استدعاء الدالة خارج الـ except مثلاً)
+        raw_tb = "".join(traceback.format_exception(type(error), error, error.__traceback__))
+
+    # نأخذ آخر 800 حرف من الـ traceback الخام أولاً ثم ننظفه بـ html.escape
+    tb_safe = html.escape(raw_tb[-800:])
+    
+    # 2. تنظيف وتحديد طول النصوص الأخرى لضمان عدم تخطي حد تليجرام الكلي (4096 حرف)
+    task_safe = html.escape(str(task_name)[:100]) # تحديد الطول بـ 100 حرف كمثال لحمايتك
+    error_type_safe = html.escape(type(error).__name__)
+    error_details_safe = html.escape(str(error)[:400]) # رفعناها لـ 400 حرف لأنها الأهم
+    
+    # 3. بناء الرسالة مع تاغات HTML المتوافقة تماماً
     msg = (
-        f"⚠️ <b>خطأ في مهمة:</b> <code>{task_name}</code>\n"
+        f"⚠️ <blockquote><b>خطأ في مهمة:</b> <code>{task_safe}</code></blockquote>\n\n"
+        f"<b>النوع:</b> <code>{error_type_safe}</code>\n"
+        f"<b>التفاصيل:</b> <code>{error_details_safe}</code>\n"
         f"━━━━━━━━━━━━━━━━\n"
-        f"<b>النوع:</b> <code>{type(error).__name__}</code>\n"
-        f"<b>التفاصيل:</b> <code>{str(error)[:300]}</code>\n"
+        f"<b>الـ Traceback:</b>\n<code>{tb_safe}</code>\n"
         f"━━━━━━━━━━━━━━━━\n"
-        f"<pre>{tb}</pre>\n"
-        f"━━━━━━━━━━━━━━━━\n"
-        f"🔔 <a href='https://t.me/DrIslambinalkhattab_1'>@DrIslambinalkhattab_1</a> راجع الأمر."
+        f"<blockquote>🔔 <b><a href='https://t.me/DrIslambinalkhattab_1'>@DrIslambinalkhattab_1</a> راجع الأمر.</b></blockquote>"
     )
+    
     try:
-        requests.post(
+        response = requests.post(
             f"{BASE_URL}/sendMessage",
             data={**_base_params(), "text": msg, "parse_mode": "HTML"},
+            timeout=10
         )
+        if not response.ok:
+            print(f"❌ تليجرام رفض إرسال التنبيه: {response.text}")
+            
     except Exception as e:
-        print(f"❌ فشل إرسال تنبيه الخطأ: {e}")
-
+        print(f"❌ فشل اتصال إرسال تنبيه الخطأ: {e}")
+        
 def send_document_bytes(data: bytes, filename: str, caption: str = ""):
     files = {"document": (filename, data, "application/pdf")}
     r = requests.post(
