@@ -19,18 +19,18 @@ on:
     - cron: '13 4 * * *'    # 📿 ذكر الساعة — 7:00 ص
     - cron: '13 5 * * *'    # 📿 ذكر الساعة — 8:00 ص
     - cron: '13 6 * * *'    # 📿 ذكر الساعة — 9:00 ص
-    - cron: '7 7 * * *'    # 📿 ذكر الساعة — 10:00 ص
+    - cron: '17 7 * * *'    # 📿 ذكر الساعة — 10:00 ص
     - cron: '13 8 * * *'    # 📿 ذكر الساعة — 11:00 ص
     - cron: '13 9 * * *'    # 📿 ذكر الساعة — 12:00 م
     - cron: '13 10 * * *'    # 📿 ذكر الساعة — 1:00 م
-    - cron: '7 11 * * *'    # 📿 ذكر الساعة — 2:00 م
+    - cron: '17 11 * * *'    # 📿 ذكر الساعة — 2:00 م
     - cron: '13 12 * * *'    # 📿 ذكر الساعة — 3:00 م
     - cron: '13 13 * * *'    # 📿 ذكر الساعة — 4:00 م
     - cron: '13 14 * * *'    # 📿 ذكر الساعة — 5:00 م
     - cron: '13 15 * * *'    # 📿 ذكر الساعة — 6:00 م
     - cron: '13 16 * * *'    # 📿 ذكر الساعة — 7:00 م
     - cron: '13 17 * * *'    # 📿 ذكر الساعة — 8:00 م
-    - cron: '7 18 * * *'    # 📿 ذكر الساعة — 9:00 م
+    - cron: '17 18 * * *'    # 📿 ذكر الساعة — 9:00 م
     - cron: '13 19 * * *'    # 📿 ذكر الساعة — 10:00 م
     - cron: '13 20 * * *'    # 📿 ذكر الساعة — 11:00 م
 
@@ -234,18 +234,18 @@ jobs:
         github.event.schedule == '13 4 * * *' ||
         github.event.schedule == '13 5 * * *' ||
         github.event.schedule == '13 6 * * *' ||
-        github.event.schedule == '7 7 * * *' ||
+        github.event.schedule == '17 7 * * *' ||
         github.event.schedule == '13 8 * * *' ||
         github.event.schedule == '13 9 * * *' ||
         github.event.schedule == '13 10 * * *' ||
-        github.event.schedule == '7 11 * * *' ||
+        github.event.schedule == '17 11 * * *' ||
         github.event.schedule == '13 12 * * *' ||
         github.event.schedule == '13 13 * * *' ||
         github.event.schedule == '13 14 * * *' ||
         github.event.schedule == '13 15 * * *' ||
         github.event.schedule == '13 16 * * *' ||
         github.event.schedule == '13 17 * * *' ||
-        github.event.schedule == '7 18 * * *' ||
+        github.event.schedule == '17 18 * * *' ||
         github.event.schedule == '13 19 * * *' ||
         github.event.schedule == '13 20 * * *'
       ))
