@@ -33,6 +33,7 @@ def load_state() -> dict:
             state = json.load(f)
         state.setdefault("khatma_count", 1)
         state.setdefault("zikr_index", 0) 
+        state.setdefault("current_file", 1)
         return state
     return {"current_file": 1, "khatma_count": 1, "zikr_index": 0}
 
