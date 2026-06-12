@@ -19,18 +19,15 @@ on:
     - cron: '0 4 * * *'    # 📿 ذكر الساعة — 7:00 ص
     - cron: '0 5 * * *'    # 📿 ذكر الساعة — 8:00 ص
     - cron: '0 6 * * *'    # 📿 ذكر الساعة — 9:00 ص
-    - cron: '0 7 * * *'    # 📿 ذكر الساعة — 10:00 ص
     - cron: '0 8 * * *'    # 📿 ذكر الساعة — 11:00 ص
     - cron: '0 9 * * *'    # 📿 ذكر الساعة — 12:00 م
     - cron: '0 10 * * *'    # 📿 ذكر الساعة — 1:00 م
-    - cron: '0 11 * * *'    # 📿 ذكر الساعة — 2:00 م
     - cron: '0 12 * * *'    # 📿 ذكر الساعة — 3:00 م
     - cron: '0 13 * * *'    # 📿 ذكر الساعة — 4:00 م
     - cron: '0 14 * * *'    # 📿 ذكر الساعة — 5:00 م
     - cron: '0 15 * * *'    # 📿 ذكر الساعة — 6:00 م
     - cron: '0 16 * * *'    # 📿 ذكر الساعة — 7:00 م
     - cron: '0 17 * * *'    # 📿 ذكر الساعة — 8:00 م
-    - cron: '0 18 * * *'    # 📿 ذكر الساعة — 9:00 م
     - cron: '0 19 * * *'    # 📿 ذكر الساعة — 10:00 م
     - cron: '0 20 * * *'    # 📿 ذكر الساعة — 11:00 م
 
@@ -234,18 +231,15 @@ jobs:
         github.event.schedule == '0 4 * * *' ||
         github.event.schedule == '0 5 * * *' ||
         github.event.schedule == '0 6 * * *' ||
-        github.event.schedule == '0 7 * * *' ||
         github.event.schedule == '0 8 * * *' ||
         github.event.schedule == '0 9 * * *' ||
         github.event.schedule == '0 10 * * *' ||
-        github.event.schedule == '0 11 * * *' ||
         github.event.schedule == '0 12 * * *' ||
         github.event.schedule == '0 13 * * *' ||
         github.event.schedule == '0 14 * * *' ||
         github.event.schedule == '0 15 * * *' ||
         github.event.schedule == '0 16 * * *' ||
         github.event.schedule == '0 17 * * *' ||
-        github.event.schedule == '0 18 * * *' ||
         github.event.schedule == '0 19 * * *' ||
         github.event.schedule == '0 20 * * *'
       ))
