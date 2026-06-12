@@ -308,7 +308,7 @@ def task_friday_salah(slot: str = ""):
     }
     # fallback لو اتشغل يدوياً بدون slot
     if slot not in slots:
-    raise ValueError(f"❌ slot غير معروف: '{slot}' — القيم المتاحة: {list(slots.keys())}")
+        raise ValueError(f"❌ slot غير معروف: '{slot}' — القيم المتاحة: {list(slots.keys())}")
     send_text(slots[slot])
 
 # ─────────────────────────────────────────────
