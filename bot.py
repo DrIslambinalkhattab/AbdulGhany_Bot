@@ -54,6 +54,28 @@ def send_text(text: str):
     )
     print(f"📨 نص: {r.status_code}")
 
+def send_error_alert(task_name: str, error: Exception):
+    """يُرسل تنبيه خطأ في الشات مع mention للمسؤول"""
+    import traceback
+    tb = traceback.format_exc()[-800:]  # آخر 800 حرف فقط عشان ما تتجاوزش الحد
+    msg = (
+        f"⚠️ <b>خطأ في مهمة:</b> <code>{task_name}</code>\n"
+        f"━━━━━━━━━━━━━━━━\n"
+        f"<b>النوع:</b> <code>{type(error).__name__}</code>\n"
+        f"<b>التفاصيل:</b> <code>{str(error)[:300]}</code>\n"
+        f"━━━━━━━━━━━━━━━━\n"
+        f"<pre>{tb}</pre>\n"
+        f"━━━━━━━━━━━━━━━━\n"
+        f"🔔 <a href='https://t.me/DrIslambinalkhattab_1'>@DrIslambinalkhattab_1</a> راجع الأمر."
+    )
+    try:
+        requests.post(
+            f"{BASE_URL}/sendMessage",
+            data={**_base_params(), "text": msg, "parse_mode": "HTML"},
+        )
+    except Exception as e:
+        print(f"❌ فشل إرسال تنبيه الخطأ: {e}")
+
 def send_document_bytes(data: bytes, filename: str, caption: str = ""):
     files = {"document": (filename, data, "application/pdf")}
     r = requests.post(
@@ -377,5 +399,10 @@ if __name__ == "__main__":
         sys.exit(1)
     task_name = sys.argv[1]
     print(f"▶️  تشغيل المهمة: {task_name}")
-    TASKS[task_name]()
-    print("✅ انتهت المهمة بنجاح")
+    try:
+        TASKS[task_name]()
+        print("✅ انتهت المهمة بنجاح")
+    except Exception as e:
+        print(f"❌ خطأ في المهمة '{task_name}': {e}")
+        send_error_alert(task_name, e)
+        sys.exit(1)
