@@ -223,7 +223,15 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID:   ${{ secrets.CHAT_ID }}
           TOPIC_ID:  ${{ secrets.TOPIC_ID }}
-        run: python bot.py friday_salah
+        run: |
+          SCHED="${{ github.event.schedule }}"
+          if   [ "$SCHED" = "0 5 * * 5" ];  then python bot.py friday_salah_fajr
+          elif [ "$SCHED" = "0 7 * * 5" ];  then python bot.py friday_salah_morning
+          elif [ "$SCHED" = "0 9 * * 5" ];  then python bot.py friday_salah_midday
+          elif [ "$SCHED" = "0 11 * * 5" ]; then python bot.py friday_salah_midday
+          elif [ "$SCHED" = "0 13 * * 5" ]; then python bot.py friday_salah_asr
+          else                                   python bot.py friday_salah
+          fi
 
   hourly-zikr:
     if: >
