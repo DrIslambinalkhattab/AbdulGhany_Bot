@@ -1,9 +1,13 @@
 {
-  "version": 2,
-  "rewrites": [
+  "functions": {
+    "api/trigger.py": {
+      "runtime": "vercel-python@python3.10"
+    }
+  },
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/trigger.py"
+      "src": "/api/(.*)",
+      "dest": "api/trigger.py"
     }
   ]
 }
