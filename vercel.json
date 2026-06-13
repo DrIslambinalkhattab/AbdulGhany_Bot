@@ -1,20 +1,27 @@
-	
-version	2
-builds	
-0	
-src	"api/trigger.py"
-use	"@vercel/python"
-config	
-maxLambdaSize	"15mb"
-routes	
-0	
-src	"/api/(.*)"
-dest	"api/trigger.py"
-env	
-BOT_TOKEN	"@bot_token"
-CHAT_ID	"@chat_id"
-TOPIC_ID	"@topic_id"
-REDIS_URL	"@redis_url"
-RELEASE_BASE	"@release_base"
-RELEASE_BASE_MP3	"@release_base_mp3"
-RELEASE_KAHF	"@release_kahf"
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/trigger.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/trigger.py"
+    }
+  ],
+  "env": {
+    "BOT_TOKEN":        "@bot_token",
+    "CHAT_ID":          "@chat_id",
+    "TOPIC_ID":         "@topic_id",
+    "REDIS_URL":        "@redis_url",
+    "RELEASE_BASE":     "@release_base",
+    "RELEASE_BASE_MP3": "@release_base_mp3",
+    "RELEASE_KAHF":     "@release_kahf"
+  }
+}
