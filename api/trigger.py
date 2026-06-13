@@ -195,7 +195,7 @@ def motivational(pct: float) -> str:
 # ─────────────────────────────────────────────
 
 # — PDF + MP3 —
-def task_daily_files():
+def task_daily_pdf():
     state  = load_state()
     n      = state["current_file"]
     khatma = state["khatma_count"]
@@ -215,28 +215,32 @@ def task_daily_files():
         f"{motiv}\n"
         f"<blockquote><b>🤲 نسأل الله أن يجعله نورًا في قلوبنا، وبركةً في أيامنا.</b></blockquote>"
     )
-    caption_mp3 = (
-        f"<blockquote><b>🎧 تلاوة الورد الـ{num}</b></blockquote>"
-    )
 
-    print(f"📤 إرسال الملف رقم {num} | الختمة {khatma} ({pct}%)")
+    print(f"📤 إرسال PDF رقم {num}")
     send_document_bytes(download(f"{RELEASE_BASE}/{num}.pdf"), f"{num}.pdf", caption_pdf)
+
+
+def task_daily_mp3():
+    state  = load_state()
+    n      = state["current_file"]
+    khatma = state["khatma_count"]
+    num    = f"{n:03d}"
+
+    caption_mp3 = f"<blockquote><b>🎧 تلاوة الورد الـ{num}</b></blockquote>"
+
+    print(f"📤 إرسال MP3 رقم {num}")
     send_audio_bytes(download(f"{RELEASE_BASE_MP3}/{num}.mp3"), f"{num}.mp3", caption_mp3)
 
     if n == TOTAL_FILES:
         state["khatma_count"] += 1
         send_text(
             f"<blockquote><b>🎉 بفضل الله اكتملت الختمة الـ{khatma}</b></blockquote>\n"
-            f"📖 <i>نسأل الله أن يجعل القرآن ربيع قلوبنا، ونور صدورنا، وأن يتقبله منا خالصًا لوجهه الكريم.</i>\n"
-            f"━━━━━━━━━━━━━━━━\n"
-            f"🌱 <b>ومن أجمل ما في الطريق إلى الله أن الختمة لا تكون نهاية، بل بداية لختمة جديدة، وغدًا بإذن الله نبدأ الختمة الـ {state['khatma_count']}، نسأل الله أن يبارك لنا فيها وأن يبلغنا تمامها.</b>\n"
-            f"<blockquote><b>🤲 اللهم تقبّل منا إنك أنت السميع العليم، وتب علينا إنك أنت التواب الرحيم.</b></blockquote>"
+            f"📖 <i>نسأل الله أن يجعل القرآن ربيع قلوبنا...</i>\n"
+            f"🌱 <b>ومن أجمل ما في الطريق إلى الله أن الختمة لا تكون نهاية، بل بداية لختمة جديدة، وغدًا بإذن الله نبدأ الختمة الـ {state['khatma_count']}.</b>"
         )
 
     state["current_file"] = (n % TOTAL_FILES) + 1
     save_state(state)
-
-
 # — أذكار الصباح —
 def task_sabah():
     print("🌅 إرسال أذكار الصباح")
