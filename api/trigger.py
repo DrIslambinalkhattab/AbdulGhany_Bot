@@ -458,7 +458,8 @@ def task_remind_fasting_thursday():
 #  قاموس المهام الموحّد
 # ─────────────────────────────────────────────
 TASKS: dict[str, callable] = {
-    "daily_files"           : task_daily_files,
+    "daily_pdf"             : task_daily_pdf,
+    "daily_mp3"             : task_daily_mp3,
     "sabah"                 : task_sabah,
     "masa"                  : task_masa,
     "kahf"                  : task_friday_kahf,
