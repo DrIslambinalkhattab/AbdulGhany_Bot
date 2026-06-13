@@ -2,7 +2,7 @@
   "version": 2,
   "functions": {
     "api/trigger.py": {
-      "runtime": "vercel-python@python3.10"
+      "runtime": "vercel-python@3.0.0"
     }
   },
   "routes": [
